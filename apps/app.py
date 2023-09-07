@@ -5,6 +5,9 @@ from flask_wtf.csrf import CSRFProtect
 from pathlib import Path
 from apps.config import config
 
+# SQLAlchemyをインスタンス
+db = SQLAlchemy()
+
 
 # create_app関数の作成
 def create_app(config_key):
@@ -13,6 +16,12 @@ def create_app(config_key):
 
     # config_keyにマッチする環境のコンフィグクラスを読み込む
     app.config.from_object(config[config_key])
+
+    # SQLAlchemyとappを連携する
+    db.init_app(app)
+
+    # Migrateとアプリを連携する
+    Migrate(app, db)
 
     # user_managementアプリを登録
     from apps.user_management import views as user_management_views

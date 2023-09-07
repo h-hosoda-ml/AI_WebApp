@@ -35,12 +35,12 @@ def create_user():
         db.session.add(user)
         db.session.commit()
         # ユーザーの一覧画面へリダイレクト
-        return redirect(url_for("user_management.index"))
+        return redirect(url_for("user_management.users"))
     return render_template("user_management/create.html", form=form)
 
 
 # ユーザー編集画面
-@user_management.route("/edit/<user_id>")
+@user_management.route("/edit/<user_id>", methods=["GET", "POST"])
 def edit_user(user_id):
     form = UserForm()
 
@@ -56,3 +56,12 @@ def edit_user(user_id):
         return redirect(url_for("user_management.users"))
 
     return render_template("user_management/edit.html", user=user, form=form)
+
+
+# ユーザーの削除処理を行うエンドポイント(Postのみ)
+@user_management.route("/edit/<user_id>/delete", methods=["POST"])
+def delete_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    db.session.delete(user)
+    db.session.commit()
+    return redirect(url_for("user_management.users"))

@@ -12,7 +12,7 @@
     {{ form.csrf_token }}
 
     <p>
-        {{ form.username.label }} {{ form.username(placeholder="ユーザー名", value=user.id) }}
+        {{ form.username.label }} {{ form.username(placeholder="ユーザー名", value=user.username) }}
     </p>
     {% for error in form.username.errors %}
     <span style="color: red;">{{ error }}</span>
@@ -34,5 +34,11 @@
 
     <p><input type="submit" value="更新"></p>
 </form>
+
+<form action="{{ url_for('user_management.delete_user', user_id=user.id) }} " method="POST">
+    {{ form.csrf_token }}
+    <input type="submit" value="削除">
+</form>
+
 
 {% endblock %}

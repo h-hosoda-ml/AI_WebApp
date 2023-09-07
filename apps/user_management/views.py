@@ -37,3 +37,22 @@ def create_user():
         # ユーザーの一覧画面へリダイレクト
         return redirect(url_for("user_management.index"))
     return render_template("user_management/create.html", form=form)
+
+
+# ユーザー編集画面
+@user_management.route("/edit/<user_id>")
+def edit_user(user_id):
+    form = UserForm()
+
+    user = User.query.filter_by(id=user_id).first()
+
+    # formからサブミットされた場合はユーザーを更新して一覧画面へリダイレクト
+    if form.validate_on_submit():
+        user.username = form.username.data
+        user.email = form.email.data
+        user.password = form.password.data
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for("user_management.users"))
+
+    return render_template("user_management/edit.html", user=user, form=form)

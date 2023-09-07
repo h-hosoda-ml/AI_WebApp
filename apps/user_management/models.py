@@ -11,7 +11,7 @@ class User(db.Model):
 
     # カラムを定義
     id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String, index=True)
+    username = db.Column(db.String, index=True)
     email = db.Column(db.String, unique=True, index=True)
     password_hash = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.now)

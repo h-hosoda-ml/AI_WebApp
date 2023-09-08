@@ -61,7 +61,7 @@ def login():
         if user is not None and user.verify_password(form.password.data):
             login_user(user)
             # TODO: ホームとなるページの作成を行う
-            return redirect(url_for("classify.html"))
+            return redirect(url_for("classify.index"))
 
         # ログイン失敗
         flash("メールアドレスかパスワードが不正です。")

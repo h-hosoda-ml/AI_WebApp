@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for
+from flask_login import login_required
 from apps.app import db
 from apps.user_management.models import User
 from apps.user_management.forms import UserForm
@@ -14,6 +15,7 @@ user_management = Blueprint(
 
 # ユーザーの一覧
 @user_management.route("/")
+@login_required
 def users():
     users = User.query.all()
     return render_template("user_management/index.html", users=users)
@@ -21,6 +23,7 @@ def users():
 
 # ユーザーの新規作成
 @user_management.route("/new", methods=["GET", "POST"])
+@login_required
 def create_user():
     form = UserForm()
     # フォームの値をバリデート
@@ -41,6 +44,7 @@ def create_user():
 
 # ユーザー編集画面
 @user_management.route("/edit/<user_id>", methods=["GET", "POST"])
+@login_required
 def edit_user(user_id):
     form = UserForm()
 
@@ -60,6 +64,7 @@ def edit_user(user_id):
 
 # ユーザーの削除処理を行うエンドポイント(Postのみ)
 @user_management.route("/edit/<user_id>/delete", methods=["POST"])
+@login_required
 def delete_user(user_id):
     user = User.query.filter_by(id=user_id).first()
     db.session.delete(user)

@@ -1,31 +1,31 @@
-{% extends "auth/base.html" %}
+{% extends "classify/base.html" %}
 
 {% block title %}ログイン{% endblock %}
 
 {% block content %}
-<h2>ログイン</h2>
-<form 
-    action="{{ url_for('auth.login') }}"
-    method="POST"
-    novalidate="novalidate"
->
-    {% for message in get_flashed_messages() %}
-    <p style="color: red">{{ message }}</p>
-    {% endfor %}
+<div class="mx-auto auth-main">
+    <div class="card auth-login">
+        <header>ログイン</header>
+        <section>
+            <form 
+                action="{{ url_for('auth.login') }}"
+                method="POST"
+                novalidate="novalidate"
+            >
 
-    {{ form.csrf_token }}
+                {{ form.csrf_token }}
+                
+                {% for message in get_flashed_messages() %}
+                <span class="auth-flash">{{ message }}</span>
+                {% endfor %}
 
-    <p>{{ form.email.label }} {{ form.email(placeholder="メールアドレス") }}</p>
-    {% for error in form.email.errors %}
-    <span style="color: red">{{ error }}</span>
-    {% endfor %}
+                {{ form.email(class="form-control auth-input", placeholder="メールアドレス") }}
 
-    <p>{{ form.password.label }} {{ form.password(placeholder="パスワード") }}</p>
-    {% for error in form.email.errors %}
-    <span style="color: red">{{ error }}</span>
-    {% endfor %}
+                {{ form.password(class="form-control auth-input", placeholder="パスワード") }}
 
-    <p>{{ form.submit() }}</p>
-    
-</form>
+                {{ form.submit(class="btn btn-md btn-primary btn-block auth-btn") }}
+            </form>
+        </section>
+    </div>
+</div>
 {% endblock %}

@@ -42,7 +42,7 @@ def signup():
         next_ = request.args.get("next")
         if next_ is None or not next_.startswith("/"):
             # TODO: ホームとなるページの作成を行う
-            next_ = url_for("user_management.users")
+            next_ = url_for("classify.index")
         return redirect(next_)
 
     return render_template("auth/signup.html", form=form)
@@ -61,7 +61,7 @@ def login():
         if user is not None and user.verify_password(form.password.data):
             login_user(user)
             # TODO: ホームとなるページの作成を行う
-            return redirect(url_for("user_management.users"))
+            return redirect(url_for("classify.html"))
 
         # ログイン失敗
         flash("メールアドレスかパスワードが不正です。")

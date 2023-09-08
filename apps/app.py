@@ -49,4 +49,10 @@ def create_app(config_key):
     # register_blueprintを使いviewsのauthをアプリへ登録する
     app.register_blueprint(auth_views.auth, url_prefix="/auth")
 
+    # classifyアプリを登録
+    from apps.classify import views as cl_views
+
+    # register_bluepringを使いviewsのdigitsdrawをアプリへ登録する
+    app.register_blueprint(cl_views.classify, url_prefix="/classify")
+
     return app

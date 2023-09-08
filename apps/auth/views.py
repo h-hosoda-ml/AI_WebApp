@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, flash, url_for, redirect, request
 from apps.app import db
-from apps.auth.forms import SignUpForm
+from apps.auth.forms import SignUpForm, LoginForm
 from apps.user_management.models import User
 from flask_login import login_user
 
@@ -41,7 +41,29 @@ def signup():
         # GETパラメータにnextキーが存在して、値がない場合はユーザーの一覧ページへ
         next_ = request.args.get("next")
         if next_ is None or not next_.startswith("/"):
+            # TODO: ホームとなるページの作成を行う
             next_ = url_for("user_management.users")
         return redirect(next_)
 
     return render_template("auth/signup.html", form=form)
+
+
+# ログインページ
+@auth.route("/login", methods=["GET", "POST"])
+def login():
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        # メールアドレスからユーザーを取得する
+        user = User.query.filter_by(email=form.email.data).first()
+
+        # ユーザーが存在してパスワードが一致する場合はログインを許可する
+        if user is not None and user.verify_password(form.password.data):
+            login_user(user)
+            # TODO: ホームとなるページの作成を行う
+            return redirect(url_for("user_management.users"))
+
+        # ログイン失敗
+        flash("メールアドレスかパスワードが不正です。")
+
+    return render_template("auth/login.html", form=form)

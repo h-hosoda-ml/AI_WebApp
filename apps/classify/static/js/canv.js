@@ -8,7 +8,7 @@ var ctx;
 var ox = 0, oy = 0;
 
 // 移動先
-x = 0, y = 0;
+var x = 0, y = 0;
 
 // draw中かどうか判断
 var isdrawing = false;

@@ -1,0 +1,25 @@
+{% extends "classify/base.html" %}
+
+{% block title %}手書き数字認識AI{% endblock %}
+
+{% block content %}
+<header>手書き文字認識</header>
+
+<div class="canvasdiv" id="canv">
+    <canvas id="can" width="280px" height="280px" style="box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);"></canvas>
+</div>
+
+<div class="row">
+    <div class="col">
+        <button type="submit" class="btn btn-primary canv-clear" onClick="clearCanv();">クリア処理</button>
+    </div>
+    <!-- TODO: 画像をサーバーへPOSTする処理とボタンの作成 -->
+    <!-- <div class="col">
+        <button type="submit" class="btn btn-primary canv-submit">認識</button>
+    </div> -->
+</div>
+{% endblock %}
+
+{% block endbody %}
+<script src="{{ url_for('classify.static', filename='js/canv.js') }}"></script>
+{% endblock %}

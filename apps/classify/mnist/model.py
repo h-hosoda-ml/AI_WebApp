@@ -197,7 +197,7 @@ def main():
         val_acc /= len(data_loader["val"].dataset)  # 検証データの精度
 
         print(f"val_loss: {val_loss:.5f}")
-        print(f"val_acc: {val_acc:.3f}", end="\n\n")
+        print(f"val_acc: {val_acc:.5f}", end="\n\n")
 
         # 検証データのスコアが最高値を上回ったときに保存
         if val_acc > val_best:

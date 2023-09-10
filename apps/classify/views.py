@@ -17,7 +17,11 @@ def index():
 @classify.route("/digitsdraw", methods=["GET", "POST"])
 @login_required
 def digitsdraw():
+    # POSTされた場合
     if request.method == "POST":
         # TODO: cnnモデルによる予測を行い結果を返す処理の作成
         pass
-    return render_template("classify/digitsdraw.html")
+
+    # GET処理だった場合
+    else:
+        return render_template("classify/digitsdraw.html")

@@ -109,15 +109,17 @@ function onMouseUp(event) {
 function drawLine() {
     // 描画の開始
     ctx.beginPath();
+    
     // 初期位置から描画を開始する
     ctx.moveTo(ox, oy);
-
+    
     // 新しい座標まで描画を行う
     ctx.lineTo(x, y);
 
     // 描画を確定
     ctx.stroke();
 }
+
 
 // canvasをクリアする関数
 function clearCanv() {
@@ -127,21 +129,24 @@ function clearCanv() {
     ctx.fillRect(0, 0, canv.getBoundingClientRect().width, canv.getBoundingClientRect().height);
 }
 
-// 画像のサーバーへのPOST
-// function sendImage() {
-//     var img = document.getElementById("can").toDataURL('image/png');
-//     img = img.replace('image/png', 'image/octet-stream');
-//     $.ajax({
-//         type: "POST",
-//         url: "http://localhost:5000",
-//         data: {
-//             "img": img
-//         }
-//     })
-//     .done( (data) => {
-//         $('#answer').html('答えは<span class="answer">'+data['ans']+'</span>です')
-//     });
-// }
+// 画像をサーバーへPOSTする関数
+function sendImage() {
+    // DataURLに変換
+    var dataURL = canv.toDataURL("image/png");
+
+    // jqueryを利用してAjaxリクエストを送信
+    $.ajax({
+        type: "POST", // HTTPリクエストメソッド
+        url: "http://127.0.0.1:5000/classify/digitsdraw", // リクエストを送信するURL
+        data: {
+            img: dataURL
+        } //リクエストデータ
+    })
+    .done((data)=>{
+        //リクエストが成功した場合、処理結果を表示する
+        $('#predict').html('あなたが書いた数字は<span class="predict">'+data['predict']+'</span>')
+    });
+}
 
 // 初期化処理を走らせる
 draw_init()

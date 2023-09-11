@@ -13,7 +13,7 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 
 # 未ログインの時にリダイレクトするエンドポイントを指定
-login_manager.login_view = "auth.signup"
+login_manager.login_view = "auth.login"
 
 # ログインの後に表示するメッセージの指定
 login_manager.login_message = ""

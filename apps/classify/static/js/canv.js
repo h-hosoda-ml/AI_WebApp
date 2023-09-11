@@ -33,8 +33,8 @@ function draw_init() {
 
     // 直線の色を黒に
     ctx.strokeStyle = "#000000";
-    // 線の幅を15pxに
-    ctx.lineWidth = 15;
+    // 線の幅を40pxに
+    ctx.lineWidth = 40;
     // 線の形状を丸く
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
@@ -131,6 +131,8 @@ function clearCanv() {
 
 // 画像をサーバーへPOSTする関数
 function sendImage() {
+    // canvas要素の取得
+    canv = document.getElementById("can");
     // DataURLに変換
     var dataURL = canv.toDataURL("image/png");
 
@@ -144,7 +146,7 @@ function sendImage() {
     })
     .done((data)=>{
         //リクエストが成功した場合、処理結果を表示する
-        $('#predict').html('あなたが書いた数字は<span class="predict">'+data['predict']+'</span>')
+        $('#dg-ans').html('あなたが書いた数字は<span class="predict" style="color:red;">' + data['prediction'] + '</span>です。')
     });
 }
 

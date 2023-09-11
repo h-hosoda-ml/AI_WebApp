@@ -265,4 +265,5 @@ pyrightconfig.json
 *.sqlite
 config.py
 migrations
+raw/
 .DS_Store

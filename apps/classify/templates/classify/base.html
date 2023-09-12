@@ -15,7 +15,17 @@
             <!-- TODO: ホームとなるページの作成 -->
             <a class="navbar-brand" href="{{ url_for('classify.index') }}"><b>H2_AI</b></a>
             <ul class="navbar-nav ml-auto">
-                {% if current_user.is_authenticated %}
+                {% if current_user.is_authenticated and current_user.is_admin %}
+                <li class="nav-item">
+                    <span class="nav-link">{{ current_user.username }}</span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('user_management.index') }}">管理者画面</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.logout') }}">ログアウト</a>
+                </li>
+                {% elif current_user.is_authenticated %}
                 <li class="nav-item">
                     <span class="nav-link">{{ current_user.username }}</span>
                 </li>

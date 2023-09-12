@@ -33,8 +33,8 @@ function draw_init() {
 
     // 直線の色を黒に
     ctx.strokeStyle = "#000000";
-    // 線の幅を40pxに
-    ctx.lineWidth = 40;
+    // 線の幅を35pxに
+    ctx.lineWidth = 35;
     // 線の形状を丸く
     ctx.lineJoin = "round";
     ctx.lineCap = "round";

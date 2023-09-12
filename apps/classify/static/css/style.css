@@ -63,3 +63,8 @@ input[type="search"] {
 .auth-btn {
     margin:30px 0 0 0;
 }
+
+.clf-flash {
+    font-size: 14px;
+    color: #9c1a1c;
+}

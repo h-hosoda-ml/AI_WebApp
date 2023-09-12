@@ -37,22 +37,18 @@ def create_app(config_key):
     login_manager.init_app(app)
 
     # user_managementアプリを登録
-    from apps.user_management import views as user_management_views
+    from apps.user_management import views as usm_views
 
-    app.register_blueprint(
-        user_management_views.user_management, url_prefix="/user_management"
-    )
+    app.register_blueprint(usm_views.user_management, url_prefix="/user_management")
 
     # authアプリを登録
     from apps.auth import views as auth_views
 
-    # register_blueprintを使いviewsのauthをアプリへ登録する
     app.register_blueprint(auth_views.auth, url_prefix="/auth")
 
     # classifyアプリを登録
     from apps.classify import views as cl_views
 
-    # register_bluepringを使いviewsのdigitsdrawをアプリへ登録する
     app.register_blueprint(cl_views.classify, url_prefix="/classify")
 
     return app

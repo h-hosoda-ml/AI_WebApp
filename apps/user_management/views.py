@@ -40,7 +40,7 @@ def create_user():
         db.session.add(user)
         db.session.commit()
         # ユーザーの一覧画面へリダイレクト
-        return redirect(url_for("user_management.users"))
+        return redirect(url_for("user_management.index"))
     return render_template("user_management/create.html", form=form)
 
 
@@ -59,7 +59,7 @@ def edit_user(user_id):
         user.password = form.password.data
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for("user_management.users"))
+        return redirect(url_for("user_management.index"))
 
     return render_template("user_management/edit.html", user=user, form=form)
 
@@ -71,4 +71,4 @@ def delete_user(user_id):
     user = User.query.filter_by(id=user_id).first()
     db.session.delete(user)
     db.session.commit()
-    return redirect(url_for("user_management.users"))
+    return redirect(url_for("user_management.index"))

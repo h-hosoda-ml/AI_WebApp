@@ -60,12 +60,16 @@ def login():
         # ユーザーが存在してパスワードが一致する場合はログインを許可する
         if user is not None and user.verify_password(form.password.data):
             login_user(user)
-            # TODO: ホームとなるページの作成を行う
-            return redirect(url_for("classify.index"))
-
+            # アドミンユーザーなら管理者画面へ
+            if user.is_admin:
+                return redirect(url_for("user_management.index"))
+            # 一般ユーザーなら通常のindexへ
+            else:
+                return redirect(url_for("classify.index"))
         # ログイン失敗
         flash("メールアドレスかパスワードが不正です。")
 
+    # GETメソッドの場合、ログインフォームを返す
     return render_template("auth/login.html", form=form)
 
 

@@ -1,8 +1,10 @@
-from datetime import datetime
+from flask import abort
+from flask_login import UserMixin, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from apps.app import db, login_manager
-from flask_login import UserMixin
-from werkzeug.security import generate_password_hash, check_password_hash
+
+from datetime import datetime
 
 
 # db.Modelを継承してUserクラスの作成を行う
@@ -17,6 +19,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+    is_admin = db.Column(db.Boolean, default=False)  # 管理者フラグ
 
     # パスワードをセットするためのプロパティ
     @property

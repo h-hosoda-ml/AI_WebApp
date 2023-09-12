@@ -15,7 +15,7 @@ class MnistModelConfig:
     device = torch.device("mps")
 
     # パラメータが保存されているファイルのパス
-    param_path = model_path / "CNN_Model_41.pth"
+    param_path = model_path / "CNN_Model_49.pth"
 
 
 def predict(x: np.ndarray):
@@ -41,9 +41,9 @@ def predict(x: np.ndarray):
     tensor_max = torch.max(x)
     tensor_min = torch.min(x)
     tensor_range = tensor_max - tensor_min
+    x = (x - tensor_min) / tensor_range
 
     # 標準偏差0.5, 平均0.5にする
-    x = (x - tensor_min) / tensor_range
     x = (x - 0.5) / 0.5
 
     # テンソルの階層を3 -> 4

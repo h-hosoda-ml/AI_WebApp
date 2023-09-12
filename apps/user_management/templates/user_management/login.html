@@ -1,0 +1,30 @@
+{% extends "user_management/base/html" %}
+
+{% block title %}管理者ページログイン{% endblock %}
+
+{% block content %}
+<div class="mx-auto usm-main">
+    <div class="card usm-login">
+        <header>管理者ログイン</header>
+        <section>
+            <form 
+                action="{{ url_for('user_management.login') }}"
+                method="POST"
+                novalidate="novalidate"
+            >
+                {{ form.csrf_token }}
+
+                {% for message in get_flashed_messages() %}
+                <span class="usm-flash">{{ message }}</span>
+                {% endfor %}
+
+                {{ from.email(class="form-control usm-input", placeholder="メールアドレス") }}
+
+                {{ form.password(class="form-control usm-input", placeholder="パスワード") }}
+
+                {{ form.submit(class="btn btn-md btn-dark btn-block usm-btn") }}
+            </form>
+        </section>
+    </div>
+</div>
+{% endblock %}

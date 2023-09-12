@@ -3,7 +3,7 @@
 {% block title %}手書き数字認識AI{% endblock %}
 
 {% block content %}
-<h4>手書き文字認識</h4>
+<h4>手書き数字認識(0-9)</h4>
 
 <div class="canvasdiv" id="canv">
     <canvas id="can" width="280px" height="280px"></canvas>
@@ -21,6 +21,5 @@
 {% endblock %}
 
 {% block endbody %}
-<script src="{{ url_for('classify.static', filename='js/jquery-3.7.1.min.js') }}"></script>
 <script src="{{ url_for('classify.static', filename='js/canv.js') }}"></script>
 {% endblock %}

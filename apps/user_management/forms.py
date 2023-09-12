@@ -24,3 +24,15 @@ class UserForm(FlaskForm):
     password = PasswordField("パスワード", validators=[DataRequired(message="パスワードは必須です。")])
 
     submit = SubmitField("新規登録")
+
+
+# 管理画面へのログインフォーム
+class AdminLoginForm(FlaskForm):
+    email = StringField(
+        "メールアドレス",
+        validators=[DataRequired("メールアドレスは必須です。"), Email("メールアドレスの形式で入力してください。")],
+    )
+
+    password = PasswordField("パスワード", validators=[DataRequired("パスワードは必須です。")])
+
+    submit = SubmitField("ログイン")
